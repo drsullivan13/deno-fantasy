@@ -27,8 +27,8 @@ const [week, setWeek] = React.useState(1)
   ];
 
   const fetchData = (week: number) => {
-    fetch(`http://localhost:8000/results/teamLeaderboard/${week}`).then((response) => {
-      console.log(`WE IN HERE`, JSON.stringify(response))
+    fetch(`http://localhost:8000/results/teamLeaderboard/${week}`).then(async (response) => {
+      console.log(`WE IN HERE`, await response.text())
     }) .catch((error) => {
       console.log(`Error occurred fetching data`, error)
     })
@@ -50,8 +50,8 @@ useEffect(() => {
         <title>Aleph.js</title>
         <meta name="description" content="The Fullstack Framework in Deno." />
       </Head>
-      <div>
-      <BarChart width={400} height={400} data={data.slice(0, 1)} maxBarSize={10} barSize={10}>
+      <>
+      <BarChart id='1' width={400} height={400} data={data.slice(0, 1)} maxBarSize={10} barSize={10}>
             <XAxis padding={{ left: 20, right: 100 }} type="number" dataKey="time" />
             <YAxis type="number" />
             <CartesianGrid horizontal={false} />
@@ -59,7 +59,7 @@ useEffect(() => {
             <Bar dataKey="uv" fill="#ff7300" maxBarSize={15} isAnimationActive={false} />
             <Bar dataKey="pv" fill="#387908" />
           </BarChart>
-      </div>
+      </>
      
     </div>
   );
